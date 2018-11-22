@@ -1,0 +1,117 @@
+
+一、作用域链的理解
+
+	作用：保证环境变量里有权访问的变量是有序的，作用域链的变量只能向上访问，到window对象终止，向下访问变量是不允许的
+
+
+二、json 数据的理解
+
+	简单来说是一种用来存储数据的单文本格式，更加宜读，便于肉眼检查  
+	
+	与其他格式的区别在于：分割数据的字符   单引号 大小括号 冒号 和逗号
+
+优点： *1） 相比其他更加灵巧    *2）不需要从服务端发送含有特定内容类型的首部信息
+
+缺点： *1） 语法过于严谨    *2） 代码不宜读     *3） eval函数存在风险(去掉符号进行运算)
+
+
+三、eval 函数的作用
+
+	将字符串生成语句执行， 例如数组求和(去掉符号进行运算)
+		
+	var res = arr.join("+")       console.log(eval(res))
+
+
+四、html5 新增的表单元素
+
+	color datatime rang time week mouth email  url number search  date  tel  calendar 
+
+
+五、概括浏览器事件模型，如何获得资源dom 节点
+	
+	三种事件模型： 1） 原始事件模型     2）DOM2级事件模型    3）IE事件模型  
+
+	事件模型的三个阶段   1） 捕获阶段    2）目标阶段    3）冒泡阶段
+
+	DOM 节点获取方法： 
+	
+		*1）通过ID获取  document.getElementById 
+
+		*2)通过name属性 document.getElementByName
+
+		*3)通过标签     document.getElementsByTagName
+
+		*4）通过class   document.getElementByClassName
+
+		*5）原生js中的 querySelector  querySelectorAll  相似与jQuery 但是比其更快
+
+
+六、css 引入方式   link 和import 的区别
+
+引入方式：1） 内连    2）外链   3） 内嵌   4） 用@import导入外部样式表
+
+link 与import的区别：
+
+	*1）link是XHTML标签，除了加载css还能加载其他， 而import只能加载css
+
+	*2）link 页面载入时同时加载css ，import是先加载页面，然后加载css
+
+	*3）link 无兼容问题，import css2 中的，低版本浏览器不兼容
+
+	*4）link支持js控制DOM改变样式，@import不支持
+
+
+
+七、改变父元素透明度，不影响子元素的方法
+
+	1） 改变 rgba（）
+
+	2）添加一个与父元素同级的div来装载子元素，定位到子元素原位置
+
+
+
+八、es6 的新特性
+
+1）增加块作用域            2）增加 let 和 const 定义
+
+3）解构赋值                4）函数参数扩展 
+
+5）增加class类支持         6）增加箭头函数
+
+7）增加模块和模块加载      8）math number string array object 增加新的API
+
+
+九、盒模型问题
+
+	标准盒模型 ：box-sizing ：content-box
+
+	怪异盒模型 ：box-sizing：border-box
+
+	弹性盒模型 ：设置属性  display：flex （给父元素添加）  
+
+
+十、apply call bind 的区别 
+
+	call 和 apply 的第一个参数都是改变this ，区别在于call后面是一一传值的，而apply是以数组的形式传值，其实际也是一一传值
+
+	call，apply 改变this后函数自动执行，而bind 不会，再调用bind的时候先改变this，返回的新函数调用的时候再传参
+
+	并且bind在低版本IE中是不兼容的
+
+
+十一、伪数组  
+
+	1）具有length 属性    2）按索引方式存储数据     3）不具有数组的方法push pop 等方法 ，但是可以用数组的方法遍历的  
+	
+	常见的有：实参的副本 argument  document.getElementsByTagName  
+
+	将类数组转成数组的方法  ：1） es6的方法 Array from  
+
+				  2) 原型的方法 Array.prototype.slice.cell(c)
+ 
+
+	
+
+	
+
+ 

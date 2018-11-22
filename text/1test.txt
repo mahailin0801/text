@@ -1,0 +1,172 @@
+
+一、DOCTYPE 严格模型 混杂模式
+
+	DOCTYPE的作用：用来声明文件类型
+
+	严格模式：按照web标准执行，是一个要求严格的DTD，不允许使用任何表现层的语法
+
+		触发条件：在html之前声明DTD就ok
+
+	混杂模式：向后解析的模式，DOCTYPE不存在或者文件不正确就会导致混杂模式
+	
+		触发条件：不声明DTD，或者在DOCTYPE之前声明XML
+
+
+
+二、HTML5标签
+
+	<aside>  <section>  <hgroup>  <summery>  <embed> 
+
+	<video>  <auido>  <datalist>  <time>  <meter>
+
+	<footer>  <header>  <nav>  <artical>  <output>  
+	
+	<figure>  <mark>  <details>  <source>  <command>
+
+
+
+三、git的操作（提交 文件）
+
+1）点进需要管理的文件，右键 选择  git bash here
+
+2 ）文件配置
+
+   		用户名   git config --global user.name mahailin0801
+
+   		邮箱	 git config --global user.email mahailin345@163.com
+
+3）git init   	 对该文件进行管理
+
+4) git add .  	 提交文件夹里的所有文件  （完成后没有任何提示说明已经成功提交到暂存区）
+
+		 git add 单独提交的文件名  （单独提交某个文件）
+
+5）git status   （查看提交的状态，文件显示绿色表示成功 ，如果是红色表示有错误的）
+
+6）git commit -m “名字（比如说mongoose等）”  （告诉git 让其把文件提交到仓库里）
+
+7）git status    再次查看文件是否全部 完全提交到仓库
+
+8）git log （查看日志信息，也就是提交的版本，有需要的时候看一下，可用作版本回归）
+
+9）git reset --hard "日志列表前六位值"     回退到某个版本，就在后面加日志列表前六位 
+
+10）在 github 网页里面新建一个存储库 （新存储库） 
+
+11）git branch  查看分支结构
+
+12） git branch 分支名字    （创建一个新的分支）
+
+13） git checkout 分支名字    （切换到这个分支）
+
+14） git checkout -b 分支名称   （创建并且切换到该分支）
+
+15） git checkout master   （一定要切换到主支上）
+
+16） git merge 分支名字  （在master上合并分支）
+
+17） git branch -d 分支名  （可选操作，删除master下的不用的分支）
+
+18）链接远程仓库（新建库之后自动生成，粘贴即可）
+	
+	git remote add origin https://github.com/mahailin0801/mongoose.git
+
+19）将暂存区的文件提交的远程仓库的master分支上
+
+	git push -u origin master
+
+	完成 查看OK
+
+
+四、github 上面代码的克隆 
+
+1）新建文件夹用来存储克隆的文件
+
+2）点击进入 右键 git bash here
+
+3）git clone 文件地址
+
+	（文件地址：选择github上面你要克隆的文件，点击克隆，然后粘贴克隆地址）
+
+
+
+五、线下克隆修改后的推送
+
+1） 线下 克隆 github项目      git clone  地址 
+
+2） 线下修改项目将修改后的项目 推送到github上 
+
+3） git add . （先提交）
+
+4） git commit -m “名字”
+
+5） git push -u origin master （不需要再链接远程仓库，直接进行）
+
+6） 如果在线上修改项目，同步到线下，可以重新克隆，也可以 在该目录下
+
+    git pull  origin master （时间久了，master代码变了，怎么下载下载到新的master代码，直接输入就OK）
+
+
+
+六、如果不能成功提交的一种可能性解决方案（重新设置秘钥）
+
+1） 在github命令行里面输入  ssh-keygen -t rsa -C mahailin345@163.com
+
+2） 得到秘钥然后在网页里面设置新的秘钥即可
+
+
+
+七、关于less的用法 （就是css的变形写法）
+
+   （浏览器并不能识别less，所以最终必须转换成css才可以识别，引用方式和css一致 用link就可以）
+
+1） 首先必须引用文件
+
+	<link rel="stylesheet/less" type="text/css" href="styles.less" />
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.8.1/less.min.js" ></script>
+
+2）	@width: 10px;
+	@height: @width + 10px;
+
+	#header {
+ 	   width: @width;
+  	   height: @height;
+	}
+
+3） 利用考拉实现转换 把less变成css就可以在页面显示
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

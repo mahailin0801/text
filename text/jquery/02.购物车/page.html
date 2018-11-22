@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style>
+			#shopbtn{
+				font-size: 30px;
+				padding: 5px 10px;
+				border: 1px solid red;
+				margin-bottom: 20px;
+				cursor: pointer;
+			}
+			p,button{
+				margin-left:80px;
+			}
+			img{
+				margin-left:40px ;
+			} 
+		</style>
+		
+	</head>
+	<body>
+		
+		<div class="shopinfo">
+			<!--<img src="img/1.jpg" alt="" />
+			<p>小米1</p>
+			<p>333</p>
+			<button>购买</button>-->
+		</div>
+	</body>
+</html>
+<script src="public.js"></script>
+<script src="cookie.js"></script>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+ 	//页面加载后 获取路径信息 从而得到要显示的商品的类别和编号
+ 	//请求ajax  获取服务器数据  ，根据商品的类别和编号确定要显示的商品
+ 	window.onload = function(){
+ 		var url = window.location.href;
+ 		var obj = addres(url);
+ 		//console.log(obj)
+ 		var pid = obj.id;
+ 		var classify = obj.classify;
+ 		//console.log(classify)
+ 		$.ajax({
+ 			type:"get",
+ 			url:"data.json",
+ 			async:true,
+ 			cache : true,
+ 			success : function(res){
+ 				console.log(res)
+ 				var arr = res[classify].list;
+ 				//console.log(arr)
+ 				var str = "";
+ 				for(var i = 0;i < arr.length;i++){
+ 					if(arr[i].id == pid){
+ 						str += `<img src="img/${arr[i].src}" alt="" />
+							<p>${arr[i].name}</p>
+							<p>${arr[i].price}</p>
+							<button>购买</button>`
+ 					}
+ 				}
+ 				$(".shopinfo").html(str);
+ 			}
+ 		});	
+ 	}
+</script>

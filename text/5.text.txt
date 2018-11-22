@@ -1,0 +1,208 @@
+
+一、HTML5中datalist 是什么
+
+	datalist标签定义选项列表，与input元素配合使用，来定义input的可能值
+
+	他以及他的选项不会被显示出来，仅仅是合法的输入值列表
+
+
+
+二、ajax 同步与异步的区别，如何解决跨域问题
+
+
+1）同步：强调顺序， 重新请求，页面刷新，新内容才出现 前面代码影响后面代码的执行
+ 
+2）异步：无先后顺序  页面不需要刷新，用户也能看到内容  前面不影响后面
+
+3) 意义：向服务端发送请求，把返回的数据获取，进行处理  实现客户端和服务端的数据交互
+
+4）ajax 四部曲   
+
+	*1) var xhr = XMLHttpRequest();
+	
+	*2) xhr.open("get/post","url","true/false");
+
+	*3) xhr.send();
+
+	*4) xhr.onreadystatechange = function(){
+	
+		  if(xhr.readystate == 4 && xhr.status == 200){
+		
+			 var res = xhr.responseText
+		   }
+	     }
+
+5）ajax的优点 缺点：
+
+优点：	*1）可以实现异步通信效果          *2） 实现页面的局部刷新
+
+	*3）按需获取数据，节约宽带资源    *4） 提高web 的程序性能
+
+	
+缺点：	*1）前进后退按钮失效        *2）搜索引擎的支持不够      *3）缺乏开发调试工具 
+
+
+6）缓存get ： 多次请求的时候，路径未变，会形成缓存，从缓存中取数据
+
+	清除缓存的方法  
+
+		*1）  math.random()   随机数
+
+		*2） new Data().getTime()  时间戳
+
+7）xhr.readystate 的状态码
+ 
+	*1）  0 表示请求未初始化 
+
+	*1）  1 与服务端建立连接，但是还没发送 
+
+	*1）  2 请求已经接受 
+
+	*1）  3 响应完成  
+
+8）xhr.status 网络状态码
+
+	*1）信息类  接收到请求，继续处理 
+
+	*2）响应成功  成功接收、理解、接受
+
+	*3）重定向类  为了完成指定的动作，必须接收进一步处理
+
+	*4）客户端错误 请求包含错误语法或不能正确执行 
+
+	*5）服务端错误  服务器不能正确执行一个请求
+
+9）ajax的封装
+
+	function getAjax(url,callback,data){
+		
+		xhr = new XMLHttpRequest();
+
+		if(data){url = url + data};
+		
+		xhr.open("get/post","url","false");
+		
+		xhr.send();
+		
+		xhr.onreadystatechange = function(){
+
+			if(xhr.readystate==4 && xhr.status==200){ var res = xhr.responseText; var ok = JSON.parse(res)}
+
+			callback(res)
+		
+		}
+			
+	}
+
+10) post 发送数据的样式
+
+	*1）设置请求头  xhr.setRequestHead("content-type","application/x-www-form-urlencoded");
+	
+	*2) var xhr = XMLHttpRequest();
+	
+	*3) xhr.open("post","url","true/false");
+
+	*4) var data = "uname=" + name + "&upwd=" + upwd;
+
+	*4) xhr.send(data);    
+
+	*5) xhr.onreadystatechange = function(){
+	
+		  if(xhr.readystate == 4 && xhr.status == 200){
+		
+			 var res = xhr.responseText
+		   }
+	     }
+
+11) get 和post方法的区别
+
+	*1）传送内容 get少，因为有限制，post理论上没有限制，但是实际为保证速度，也尽量少
+
+	*2）安全问题 get 不安全，如被劫持，会导致数据泄露  而post相对安全
+
+	*3）缓存问题 get请求会造成缓存 ， 而post 不会，解决方案是 随机数 时间戳 
+
+12）同源策略 
+
+	是js 的重要安全度量标准， 目的是防止某个文档脚本从多个不同源装载，所以要保证协议，域名，端口号完全一致才可以
+
+	为什么有同源限制： 安全性能 （阻止别人拿到）
+
+13）解决跨域的方法： jsonp  iframe  window.name  window.postMessage  服务器设置代理页面
+
+
+三、jsonp 的跨域解决方法 （前端的跨域请求）
+
+	*1）动态创建 script 标签 添加到 body            \      var oscript = document.createdElement("script)
+
+	*2）设置 script 标签的 src 值为一个接口路径     \      document.body.appendChild(oscript)
+
+	*3）接口路径有一个参数，代表回调函数 cb ，callback \   oScript.src = "http://127.0.0.1?cb=fn"
+
+	*4）通过回调函数拿到服务器的数据
+
+
+	注意点：jsonp 方法获得的数据是object类型  不需要转换
+
+
+四、解决异步的方法
+
+	*1） 回调      *2）promise 
+
+	promise对象的三种状态  1）pending  进行中    2）resolved  成功解决了    3）rejected  失败了
+
+	promise对象如果执行success表示成功 ，接下来执行 then（）方法  失败failed 执行 catch（）方法
+
+用promise对ajax进行封装
+
+	function promiseAjax (url,data){
+
+		if(data){url=url+data};
+		
+		var pro = new Promise(function(success,failed){
+
+			var xhr = new XMLHttpRequest();
+	
+			xhr.open("get/post","url");
+
+			xhr.send();
+
+			xhr.onreadystatechange = function(){
+
+				if(xhr.readystate==4 && xhr.status == 200){
+
+					sucess(xhr.responseText)
+				}
+			}
+			setTimeOut(function(){	
+
+				alert("失败")
+			}，5000)
+		})
+		return pro
+	}
+
+
+	var res = promiseAjax (url);
+	
+	res.then(function(msg){
+	
+		console.log(msg)
+	
+	},function(){
+
+		console.log(msg)
+	})
+
+	
+	
+	
+
+	
+
+
+
+
+
+
+

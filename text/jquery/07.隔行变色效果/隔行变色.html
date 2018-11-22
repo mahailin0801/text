@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				list-style: none;
+				width: 1000px;
+				margin:  0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<!--<li>8</li>-->
+		</ul>
+	</body>
+</html>
+<script src="jquery-1.11.1.js"></script>
+<script>
+	$.fn.extend({
+		setColor : function(){
+			$(this).each(function(index,item){
+				if(index % 2){
+					$(this).css("background","pink")
+				}else{
+					$(this).css("background","yellow")
+				}
+			})
+			return $(this);
+		},
+		overFn : function(){
+			$(this).mouseenter(function(){
+				color = $(this).css("background");
+				$(this).css("background","green") 
+			})
+			return $(this);
+		},
+		outFn : function(){
+			$(this).mouseleave(function(){
+				$(this).css("background",color) 
+			})
+		}
+	})
+	$("li").setColor().overFn().outFn();
+</script>

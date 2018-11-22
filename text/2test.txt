@@ -1,0 +1,143 @@
+
+一、 语义化的理解
+
+1） 页面内容结构化，便于浏览器、搜索引擎的解析
+
+2）无css样式下，也以文档格式显示，且宜读
+
+3）搜索引擎的爬虫依赖于标记确定上下文、关键字的权重，利于SEO
+
+4）网站分块，便于阅读维护理解
+
+
+二、GIF PNG JPG 图片的区别
+
+  GIF
+
+1）支持透明 （全透明   全不透明）
+
+2）支持动画
+
+3）无损耗的图像格式
+
+4）水平扫描  （由上到下水平压缩的）
+
+5）可进行间隔渐进显示
+
+  JPG
+
+1）不支持透明
+
+2）不支持动画
+
+3）图片除了旋转，裁切，都会有损耗
+
+4）支持隔行渐进显示
+
+  PNG （png8  png24 png32三种格式）
+
+1）完全支持透明（全透明 半透明 全不透明）
+
+2）不支持动画
+
+3）PNG24 相对于 PNG8 图片质量更高  
+
+
+
+三、文本加粗的设置 font-weight  （normal， bold ，bolder，light， lighter） （100-900）
+
+
+四、require（模块，做了解即可）
+
+为啥用： 当一个页面引用了多个js文件的时候，会出现依赖加载顺序，防止发生错误顺序
+
+1）引用页面  require.js 文件
+
+	<script src="require.js"  data-main = "main"></script>
+
+2）新建一个main.js 的文件 然后引入
+
+	requirejs.config({
+		paths : {
+			jquery : "jquery-1.11.1.min",
+			deo : "demo"
+		}
+	})
+
+	requirejs(["jquery","deo"],function($,m){
+		$("#btn").click(function(){
+		
+		})
+	})
+
+
+五、 懒加载 
+
+0) 意义：前端的优化，减少或者延迟请求次数
+
+1）优点 ：1.为了提高页面加载速度，改善用户体验，对未出现在视野的图片先不加载，出现时才加载
+
+	  2.请求后台数据时，不是整页加载，视野内先加载，然后出现那一部分，加载那部分
+
+2）原理：1.把图片的src 指向懒加载的图片， 
+
+	 2.图片真实路径存在一个自定义属性里面
+
+	 3.视野内出现图片，获取img ，然后把自定义属性的值赋给src
+
+	 4.先加载一部分，触发某一条件利用异步加载剩余，最大程度减少服务器端的资源消耗
+	    
+3）     <script src="jquery.lazyload.min.js"></script>
+
+	<a href="#"><img src="images/lazyload.gif" data-original="images/10.jpg"></a>
+
+	$(function() {
+
+          	$("img").lazyload({ 
+
+          		placeholder : "images/lazyload.gif",
+
+                	effect: "fadeIn"
+          	 })  
+     	 })
+
+4）实现方式 
+
+	*1）延时加载，使用 setTimeOut or setlnterval  
+
+	*2）条件加载，符合某些条件，或者触发某一事件开始异步下载
+
+	*3) 可视区加载，运用滚动条实现 
+
+
+
+六、HTML5中本地存储的概念，优点，与 cookie 的区别
+
+1） HTML5中包含两种存储：sessionStorage  与 localStorage 
+
+2) sessionStorage 用于本地存储一个会话的数据，浏览器关闭之后，数据消失，不是一种持久的存储方式
+
+3）localStorage 是一个持久的本地存储，除非主动删除，否则永远不会过期
+
+4） cookie 是为了表明用户身份存储在本地终端上的数据
+
+
+区别	*1）cookie 数据在浏览器和服务器之间传递， 其他两个仅在本地存储 cookie还有路径，可以限制其路径
+
+	*2）存储大小的不同  cookie 通常不超过4k比较小， 适合保存小数据
+
+	    sessionStroage 和 localStorage 虽有限制，但比cookie大得多 
+
+	*3）数据有效期不同  sessionStroage 仅在当前浏览器窗口有效，localStorage 始终有效
+
+	   cookie 在过期时间之前一直有效，即使关闭窗口浏览器
+
+	*4） 作用域不同， sessionStroage 不在不同浏览器共享，其他两个则可以在不同浏览器窗口共享数据
+
+
+
+
+
+
+
+

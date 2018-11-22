@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="main.css" />
+		
+		<script src="jquery.min.js"></script>
+		<script src="cookie.js"></script>
+		<style>
+			.header{
+				height: 40px;
+				width: 900px;
+				margin: 0 auto 50px;
+			}
+		</style>
+	</head>
+	<body>		 
+		<div class="header">
+			<span id="s"><a href="login.html">登录 / 注册</a></span>
+			<span id="s1">
+			</span>
+		</div>
+		<div class="nav clearfix">
+			<!--<span>小米手机</span>-->
+		</div>		
+		<ul class="shoplist clearfix">
+			<!--<li>
+				<a href="page.html">
+					<img src="img/1.jpg" alt="" />
+					<p>小米1</p>
+					<p>890</p>
+				</a>
+				<button>加入购物车</button>
+			</li>-->
+		</ul>	
+	</body>
+</html>
+<script type="text/javascript">
+	//1、页面加载请求服务器数据
+	window.onload = function(){
+		$.ajax({
+			type:"get",
+			url:"data.json",
+			async:true,
+			cache :true,
+			success : function(res){
+				//console.log(res);
+				var title = "";
+				var str = "";
+				for(var key in res){
+					//console.log(res[key].name)
+					//console.log(res[key].list)
+					title += `<span classify = ${key}>${res[key].name}</span>`;
+					var arr = res[key].list;
+					for(var i = 0; i < arr.length;i++){
+						//console.log(arr[i])
+						str += `<li>
+								<a href="page.html?id=${arr[i].id}&classify=${key}">
+									<img src="img/${arr[i].src}" alt="" />
+									<p>${arr[i].name}</p>
+									<p>${arr[i].price}</p>
+								</a>
+								<button pid=${arr[i].id} name=${arr[i].name} src=${arr[i].src} price=${arr[i].price}>加入购物车</button>
+							</li>`
+					}
+				}
+				$(".nav").html(title);
+				$(".shoplist").html(str);
+				
+				//选项卡
+				$(".nav span").mouseenter(function(){
+					var classify = $(this).attr("classify")
+					//console.log(classify);
+					var cur = res[classify].list;
+					//console.log(cur)
+					var str1 = "";
+					for(var i = 0; i < cur.length;i++){
+						str1 += `<li>
+								<a href="page.html?id=${cur[i].id}&classify=${classify}">
+									<img src="img/${cur[i].src}" alt="" />
+									<p>${cur[i].name}</p>
+									<p>${cur[i].price}</p>
+								</a>
+								<button pid=${arr[i].id} name=${arr[i].name} src=${arr[i].src} price=${arr[i].price}>加入购物车</button>
+							</li>`
+					}
+					$(".shoplist").html(str1);
+				})
+				
+				
+				//加入购物车
+				var ary = [];
+				$(".shoplist").on("click","button",function(){
+					var flag = true;
+					var obj = {
+						id : $(this).attr("pid"),
+						name : $(this).attr("name"),
+						src : $(this).attr("src"),
+						price : $(this).attr("price"),
+						count : 1
+					}
+					var cookieInfo = getCookie("message");
+					if(cookieInfo.length != 0){
+						ary = cookieInfo;
+						for(var i = 0;i < ary.length;i++){
+							if(ary[i].id == obj.id){
+								ary[i].count++;
+								flag = false;
+							}
+						}
+					}
+					if(flag){
+						ary.push(obj);
+					}
+					//setCookie(key,value,days)
+					setCookie("message",JSON.stringify(ary))
+					//console.log(document.cookie)
+					
+					//进行购物车的结算
+					if(!confirm("确定——继续购买，取消——进行结算")){
+						window.location.href = "shopcar.html"
+					}
+				})
+			}
+		});
+	}
+</script>

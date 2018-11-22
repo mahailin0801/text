@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		body{
+			height: 2000px;
+		}
+		.go{
+			position: fixed;
+			right:20px;
+			bottom: 50px;
+		}
+	</style>
+	<body>
+		<button class="go">回到顶部</button>
+	</body>
+</html>
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+	/*$(document).scroll(function(){触发滚动条的事件
+		console.log(1)
+	})*/
+	$(".go").click(function(){		
+		$("html,body").animate({
+			scrollTop : 0
+		},1500)
+	})
+</script>

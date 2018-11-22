@@ -1,0 +1,135 @@
+
+一、对HTML5的理解
+
+1）良好的移动性，以移动设备为主
+
+2）响应式设计，以适应自动变化的屏幕尺寸
+
+3）支持离线缓存技术，webStorage本地缓存
+
+4）新增标签元素（canvas,video,audio）新增特殊内容元素，新增表单控件
+
+5）地理定位。。
+
+6）新增websocket / webWork 技术
+
+
+
+二、js 面向对象的几种方式
+
+1）对象字面量 var obj =  {}
+
+2）创建实例对象  
+
+3）构造函数模式
+
+4）工厂模式  用一个函数，通过传递参数返回对象
+
+5）原型模式  
+
+
+三、css 属性会影响dom 读取文档流的顺序
+
+1）direction       2）writing - mode
+
+
+
+四、如何对网站的文件和资源进行优化
+
+1）文件合并  （目的：减少http的请求）
+
+2）文件压缩    （减少文件下载的体积）
+
+3）使用cdn 托管资源
+
+4）使用缓存
+
+5）打包压缩必要的js 和css文件
+
+6）meta  heading alt  标签优化
+
+7）反向链接，网站外链接优化
+
+
+五、输入URL后的加载过程
+
+1）查找域名对应的IP地址
+
+2）建立连接  （TCP的三次握手）
+
+3）构建网页
+
+4）断开连接 （TCP的四次挥手）
+
+
+六、jQuery 中有几种类型选择器
+
+1）层叠选择器 $("from input")
+
+2) 基本过滤选择器  :first  :last  :not
+
+3）内容过滤选择器   odd:eq() ：animated
+
+4) 可视化过滤   ：hidden  ：visible
+
+5）属性过滤选择器
+
+6）子元素过滤选择器
+
+7）表单元素过滤选择器
+
+8）ID 类 类型 元素
+
+
+七、行内元素  块级元素  空元素
+
+向内元素：  a b span select strong  img  input
+
+块级元素： div ul li p ol dl dt dd h1 
+
+空元素：  <br/> <hr> <img> <input> <link>  <meta>
+
+	<area> <base> <col> <command> <embed> <keygen>  <param>  <source>  <track>  <wbr>
+
+
+八、js 的基本规范
+
+1）不要在同一行申明多个变量
+
+2）使用 ===/!== 来比较true false 或者数值
+
+3）使用对象字面量替代 new Array这种形式
+
+4）不要使用全局函数
+
+5）switch 语句必须带有default 分支
+
+6）函数的返回值不该时有时无
+
+7）for循环必须使用大括号
+
+8）if语句必须使用大括号
+
+9）for in 循环中的变量，应该使用var 关键字明确限定作用域，避免作用域的污染
+
+
+九、标准的css盒模型  
+
+1）盒模型有两种： IE盒子模型   W3C 盒子模型
+
+2） 盒模型 ：内容（content） 填充(pading) 边界(margin) 边框(border)
+
+3) 区别：IE 的width 部分把 border  padding 都计算了进去
+
+
+
+十、三种减少页面加载的方法
+
+1）js css 的源码压缩
+
+2）CDN 托管
+
+3）data 缓存
+
+
+

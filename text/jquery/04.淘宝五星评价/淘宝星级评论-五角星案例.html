@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02五角星案例</title>
+	<style>
+		* { margin: 0; padding: 0; }
+		ul { list-style: none; margin: 100px; }
+		.comment {
+			color: red;
+		}
+
+		.comment li {
+			float: left;
+			font-size: 40px;
+			margin-left:5px;
+		}
+	</style>
+	
+	
+</head>
+<body>
+	<ul class="comment">
+		<li id="s">☆ </li>
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+	</ul>
+</body>
+</html>
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+	//end() 结束其前面最近的选择器   
+	//$("#s").next().next().next().end().end().css( "color","blue" )
+	/*
+	 1、鼠标移入   ：当前星星和前面的为实心的
+	 			    当前星星后面的是空心
+	 2、鼠标移出  ：
+	 	 未点击： 全部空心
+	 	 有点击： 当前点击的星星和前面的是实心的
+	 3、鼠标点击：
+	     	当前点击的星星和前面的是实心的
+	 * */
+	
+	var empSatr = "☆";   
+	var selStar = "★";
+	$(".comment").on('mouseenter','li',function(){
+		$(this).html(selStar).prevAll().html(selStar).end().nextAll().html(empSatr);
+	})
+	$(".comment").on('mouseleave',"li",function(){
+		$("li").html(empSatr);
+		$(".select").html(selStar).prevAll().html(selStar);
+	});
+	
+	
+	$(".comment").on('click',"li",function(){
+		$(this).addClass('select').siblings().removeClass("select");
+	})
+	
+	
+</script>
